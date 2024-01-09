@@ -29,7 +29,11 @@ where c.CategoryID in (2,8);
 
 /* joins: find the product name, total # sold, and total price sold,
 for Eagles: Hotel California --You may need to use SUM() */
-select p.Name, Sum(s.quantity) as Total, Sum(s.price) from sales as s
+select p.Name, Sum(s.quantity) as "Total_Sales", Sum(s.quantity * s.PricePerUnit) as "Total_Price" from sales as s
+inner join products as p
+on s.ProductID = p.ProductID
+Where p.Name like "%Hotel%"
+group by p.ProductID;
 
 
 -- /* joins: find Product name, reviewer name, rating, and comment on the Visio TV. (only return for the lowest rating!) */
